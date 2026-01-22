@@ -3,7 +3,7 @@ Pomysły:
 1.Kasyno
 2.Lootboxy
 
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 3.LexConnect(Legal Marketplace & Case Management)
 
 1. Architektura Systemu (Kluczowe moduły)
@@ -36,7 +36,7 @@ Aby projekt ruszył i był użyteczny, nie potrzebujesz od razu wszystkiego. Sku
   -Jan płaci przez aplikację. Pieniądze są "zamrożone".
   -Mecenas przesyła gotowy sprzeciw od nakazu zapłaty przez panel.
   -Jan klika "Odebrano". Pieniądze trafiają na konto Mecenasa.
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 4.Logistyka Rozpraw - Aplikacja łącząca zlecającego z aplikantem lub adwokatem w danym mieście.
 Featury: System ocen, weryfikacja numeru legitymacji oraz – co najważniejsze – bezpieczny przesył akt wewnątrz aplikacji (zamiast wysyłania wrażliwych danych mailem).
 
@@ -53,7 +53,7 @@ Największe wyzwania:
 Odpowiedzialność dyscyplinarna: Jasne określenie w regulaminie, kto odpowiada za ewentualne błędy (substytut czy zlecający).
 
 Standardy bezpieczeństwa: Musisz przekonać prawników, że przesyłanie skanów akt przez Twoją aplikację jest bezpieczniejsze niż mail (szyfrowanie end-to-end).
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 5.Terminarz Biegłego - Platforma, na której biegli sądowi (ale też prywatni rzeczoznawcy) aktualizują swój status dostępności.
 Featury: Adwokat przed złożeniem wniosku o biegłego mógłby sprawdzić, kto w danej dziedzinie (np. rekonstrukcja wypadków) ma najkrótszy czas oczekiwania i zasugerować tę osobę sądowi.
 
@@ -76,7 +76,7 @@ Największe wyzwania:
 Motywacja biegłych: Dlaczego mieliby tam zaglądać? Musisz im zaoferować narzędzie do zarządzania własnym kalendarzem za darmo, by chcieli aktualizować statusy.
 
 Dane historyczne: Pozyskanie rzetelnych informacji o tym, jak szybko dany biegły realnie pracuje.
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 6.DevMatch AI.(Service Marketplace dla branży IT)
 1. Moduł Klienta: "Kreator Projektu"
   Zamiast pustego pola tekstowego, klient przechodzi przez proces, który pomaga mu zdefiniować potrzeby.
@@ -97,15 +97,18 @@ Dane historyczne: Pozyskanie rzetelnych informacji o tym, jak szybko dany biegł
    
 4. Funkcjonalności MVP (Minimum Viable Product)
   Aby wystartować, skupiłbym się na tych 4 filarach:
+
    <img width="805" height="238" alt="image" src="https://github.com/user-attachments/assets/14be98bb-b131-484e-9f4f-73608b067642" />
 
 
-5. Algorytm Estymacji Ceny (Logika)Nie musisz od razu budować skomplikowanej sieci neuronowej. Na start wystarczy algorytm wagowy:
+6. Algorytm Estymacji Ceny (Logika)Nie musisz od razu budować skomplikowanej sieci neuronowej. Na start wystarczy algorytm wagowy:
+   
    <img width="778" height="65" alt="image" src="https://github.com/user-attachments/assets/79a33029-86e1-40d3-9858-1ecbfc47bccc" />
+
    Wagi funkcji: Każda funkcjonalność (np. powiadomienia push) ma przypisaną średnią liczbę godzin.
    Współczynnik złożoności: Mnożnik (np. 1.2x), jeśli klient zaznaczy, że aplikacja musi obsługiwać milion użytkowników jednocześnie.
    
-6. Kolejne kroki i model biznesowy
+7. Kolejne kroki i model biznesowy
 Zanim zaczniesz budować, warto przemyśleć, jak strona będzie zarabiać:
   Prowizja od sukcesu: Np. 5-10% od zaakceptowanej kwoty zlecenia.
   Model Freemium: Programista widzi oferty z opóźnieniem, chyba że opłaca abonament "Pro".

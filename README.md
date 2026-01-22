@@ -97,17 +97,8 @@ Dane historyczne: Pozyskanie rzetelnych informacji o tym, jak szybko dany biegł
    
 4. Funkcjonalności MVP (Minimum Viable Product)
   Aby wystartować, skupiłbym się na tych 4 filarach:
-    |----------------------- |-------------------------------------------------------------------------------------------------------------------|
-    |Funkcjonalność          | Opis                                                                                                              |
-    |------------------------|-------------------------------------------------------------------------------------------------------------------|
-    |Weryfikacja Kont        |	Integracja z GitHub/LinkedIn dla programistów (import portfolio).                                                |
-    |------------------------|-------------------------------------------------------------------------------------------------------------------|
-    |Silnik Estymacji AI     |	Prosty model bazujący na "punktach funkcyjnych" (np. logowanie = 10 pkt, czat = 50 pkt) przeliczanych na walutę. |
-    |------------------------|-------------------------------------------------------------------------------------------------------------------|
-    |System Kamieni Milowych |	Możliwość dzielenia projektu na etapy (np. Design, Frontend, Backend) i akceptowania ich osobno.                 |
-    |------------------------|-------------------------------------------------------------------------------------------------------------------|
-    |Bezpieczny Czat         |Komunikacja wewnątrz platformy, aby zachować ślad ustaleń w razie sporu.                                           |
-    |------------------------|-------------------------------------------------------------------------------------------------------------------|
+   <img width="805" height="238" alt="image" src="https://github.com/user-attachments/assets/14be98bb-b131-484e-9f4f-73608b067642" />
+
 
 5. Algorytm Estymacji Ceny (Logika)Nie musisz od razu budować skomplikowanej sieci neuronowej. Na start wystarczy algorytm wagowy:
    <img width="778" height="65" alt="image" src="https://github.com/user-attachments/assets/79a33029-86e1-40d3-9858-1ecbfc47bccc" />

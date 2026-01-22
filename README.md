@@ -1,7 +1,7 @@
 # Projekt_na_semestr
 Pomysły:
-1.Kasyno
-2.Lootboxy
+1.Kasyno<br>
+2.Lootboxy<br>
 
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 3.LexConnect(Legal Marketplace & Case Management)

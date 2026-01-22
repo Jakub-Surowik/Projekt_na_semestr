@@ -1,9 +1,9 @@
 # Projekt_na_semestr
-Pomysły:
+Pomysły:<br>
 1.Kasyno<br>
 2.Lootboxy<br>
 
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+<p>
 3.LexConnect(Legal Marketplace & Case Management)
 
 1. Architektura Systemu (Kluczowe moduły)
@@ -35,8 +35,8 @@ Aby projekt ruszył i był użyteczny, nie potrzebujesz od razu wszystkiego. Sku
   -Mecenas klika "Podejmij sprawę". System wysyła Janowi wiadomość: "Mecenas Nowak przyjął Twoje zlecenie. Opłać usługę, aby zacząć".
   -Jan płaci przez aplikację. Pieniądze są "zamrożone".
   -Mecenas przesyła gotowy sprzeciw od nakazu zapłaty przez panel.
-  -Jan klika "Odebrano". Pieniądze trafiają na konto Mecenasa.
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+  -Jan klika "Odebrano". Pieniądze trafiają na konto Mecenasa.</p>
+<p>
 4.Logistyka Rozpraw - Aplikacja łącząca zlecającego z aplikantem lub adwokatem w danym mieście.
 Featury: System ocen, weryfikacja numeru legitymacji oraz – co najważniejsze – bezpieczny przesył akt wewnątrz aplikacji (zamiast wysyłania wrażliwych danych mailem).
 
@@ -52,8 +52,8 @@ Raportowanie po rozprawie: Standaryzowany formularz, który substytut wypełnia 
 Największe wyzwania:
 Odpowiedzialność dyscyplinarna: Jasne określenie w regulaminie, kto odpowiada za ewentualne błędy (substytut czy zlecający).
 
-Standardy bezpieczeństwa: Musisz przekonać prawników, że przesyłanie skanów akt przez Twoją aplikację jest bezpieczniejsze niż mail (szyfrowanie end-to-end).
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+Standardy bezpieczeństwa: Musisz przekonać prawników, że przesyłanie skanów akt przez Twoją aplikację jest bezpieczniejsze niż mail (szyfrowanie end-to-end).</p>
+<p>
 5.Terminarz Biegłego - Platforma, na której biegli sądowi (ale też prywatni rzeczoznawcy) aktualizują swój status dostępności.
 Featury: Adwokat przed złożeniem wniosku o biegłego mógłby sprawdzić, kto w danej dziedzinie (np. rekonstrukcja wypadków) ma najkrótszy czas oczekiwania i zasugerować tę osobę sądowi.
 
@@ -75,8 +75,8 @@ Wnioski "pod klucz": Generator gotowego wniosku dowodowego do sądu, który od r
 Największe wyzwania:
 Motywacja biegłych: Dlaczego mieliby tam zaglądać? Musisz im zaoferować narzędzie do zarządzania własnym kalendarzem za darmo, by chcieli aktualizować statusy.
 
-Dane historyczne: Pozyskanie rzetelnych informacji o tym, jak szybko dany biegły realnie pracuje.
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+Dane historyczne: Pozyskanie rzetelnych informacji o tym, jak szybko dany biegły realnie pracuje.</p>
+<p>
 6.DevMatch AI.(Service Marketplace dla branży IT)
 1. Moduł Klienta: "Kreator Projektu"
   Zamiast pustego pola tekstowego, klient przechodzi przez proces, który pomaga mu zdefiniować potrzeby.
@@ -113,6 +113,7 @@ Zanim zaczniesz budować, warto przemyśleć, jak strona będzie zarabiać:
   Prowizja od sukcesu: Np. 5-10% od zaakceptowanej kwoty zlecenia.
   Model Freemium: Programista widzi oferty z opóźnieniem, chyba że opłaca abonament "Pro".
   Promowanie ogłoszeń: Klient płaci za to, by jego projekt wyświetlał się na górze listy i przyciągnął najlepszych seniorów.
+</p>
 
 
 

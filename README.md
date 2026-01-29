@@ -37,7 +37,7 @@ Aby projekt ruszył i był użyteczny, nie potrzebujesz od razu wszystkiego. Sku
   <li>Nastawienie mnetalne <- tu jesteśmy</li>
   <li>Zebranie informacji</li>
   <li>Odpoczynek po zbieraniu informacji</li>
-  <li>ustalenia wizualne</li>
+  <li>Rozdzielenie zadań</li>
   <li>ustalenia wizualne</li>
   <li>Odpoczynek</li>
   <li>Szkielet strony</li>

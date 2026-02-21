@@ -171,6 +171,12 @@
   }
 }
 
+/* ensure second step content scrolls if too tall */
+.auth-form {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
 .form-error {
   color: red;
   font-size: 14px;

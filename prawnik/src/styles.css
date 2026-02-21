@@ -149,3 +149,31 @@ input[type="file"]::file-selector-button:hover {
 .btn-red:hover {
   background: #c9302c;
 }
+
+/* calendar styles */
+.lawyer-profile-view table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.calendar-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+.lawyer-profile-view th {
+  background: var(--gold-light);
+  color: var(--text-dark);
+  font-weight: 600;
+}
+.lawyer-profile-view td {
+  background: #fafafa;
+  transition: background 0.2s;
+}
+.lawyer-profile-view tr:hover td {
+  background: #f0f0f0;
+}
+.lawyer-profile-view button:disabled {
+  background: #ccc !important;
+  color: #666 !important;
+  cursor: not-allowed;
+}

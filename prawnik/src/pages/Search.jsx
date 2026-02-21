@@ -1,36 +1,41 @@
+import { useState, useEffect } from "react";
+import { loadUsers } from "../utils/userStorage";
+import LawyerProfileView from "../components/LawyerProfileView";
+
 export default function Search() {
+  const [lawyers, setLawyers] = useState([]);
+  const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
+    const all = loadUsers();
+    setLawyers(all.filter(u => u.isLawyer));
+  }, []);
+
+
   return (
     <>
       <div className="container" style={{ padding: "60px 0" }}>
         <h2 className="gold-text">Znajdź Prawnika</h2>
 
-        <div className="card" style={{ margin: "30px 0", maxWidth: "800px", margin: "30px auto" }}>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <input 
-              placeholder="Specjalizacja" 
-              style={{ flex: 1, minWidth: "200px" }}
-            />
-            <input 
-              placeholder="Lokalizacja"
-              style={{ flex: 1, minWidth: "200px" }}
-            />
-            <select style={{ minWidth: "150px" }}>
-              <option>-- Forma --</option>
-              <option>Online</option>
-              <option>Stacjonarnie</option>
-              <option>Oba</option>
-            </select>
-            <button className="btn-gold" style={{ minWidth: "120px" }}>
-              Szukaj
-            </button>
-          </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 20, marginTop: 30 }}>
+          {lawyers.map(l => (
+            <div
+              key={l.email}
+              className="card"
+              style={{ cursor: "pointer" }}
+              onClick={() => setSelected(l)}
+            >
+              <h4>{l.firstName} {l.lastName}</h4>
+              {l.specialization && l.specialization.length > 0 && (
+                <p style={{ fontSize: 12 }}>{l.specialization.join(', ')}</p>
+              )}
+            </div>
+          ))}
         </div>
 
-        <div className="card" style={{ maxWidth: "600px", margin: "20px auto" }}>
-          <h3>Mec. Anna Nowak</h3>
-          <p>Prawo cywilne</p>
-          <p className="gold-text" style={{ fontSize: "18px", fontWeight: "600" }}>Od 300 zł</p>
-        </div>
+        {selected && (
+          <LawyerProfileView user={selected} onClose={() => setSelected(null)} />
+        )}
       </div>
     </>
   );

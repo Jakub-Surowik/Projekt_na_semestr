@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getUserTasks, addTask, updateTask } from "../utils/tasksStorage";
 
-// simple sample data for tasks
+// simple sample data used when user has no tasks yet
 const initialTasks = [
-  { id: 1, title: "Sprzeciw od nakazu – Jan Kowalski" },
-  { id: 2, title: "Pozew o zapłatę – Sp. z o.o." }
+  { title: "Sprzeciw od nakazu – Jan Kowalski" },
+  { title: "Pozew o zapłatę – Sp. z o.o." }
 ];
 
 export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDeleteAccount }) {
@@ -12,10 +13,12 @@ export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDelete
   const [tab, setTab] = useState("sprawy");
   const [profileData, setProfileData] = useState({});
 
-  // task state
-  const [pending, setPending] = useState(initialTasks);
-  const [inProgress, setInProgress] = useState([]);
-  const [completed, setCompleted] = useState([]);
+  // task state stored in array, computed into columns
+  const [tasks, setTasks] = useState([]);
+
+  const pending = tasks.filter(t => t.status === "pending");
+  const inProgress = tasks.filter(t => t.status === "inProgress");
+  const completed = tasks.filter(t => t.status === "completed");
 
   useEffect(() => {
     // prefill form data when opening settings
@@ -23,6 +26,27 @@ export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDelete
       setProfileData({ email: user.email, password: "" });
     }
   }, [tab, user]);
+
+  // load tasks for current lawyer and create defaults if none
+  useEffect(() => {
+    if (!user) return;
+    const userTasks = getUserTasks(user.email);
+    if (userTasks.length === 0) {
+      const now = Date.now();
+      // add sample entries
+      initialTasks.forEach((t, idx) => {
+        addTask({
+          id: now + idx,
+          lawyerEmail: user.email,
+          title: t.title,
+          status: "pending"
+        });
+      });
+      setTasks(getUserTasks(user.email));
+    } else {
+      setTasks(userTasks);
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,15 +71,17 @@ export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDelete
 
   const moveToInProgress = (task) => {
     if (window.confirm("Przenieść sprawę do 'W toku'? Nie można cofnąć.")) {
-      setPending(p => p.filter(t => t.id !== task.id));
-      setInProgress(p => [...p, task]);
+      const updated = { ...task, status: "inProgress" };
+      updateTask(updated);
+      setTasks(prev => prev.map(t => (t.id === task.id ? updated : t)));
     }
   };
 
   const moveToCompleted = (task) => {
     if (window.confirm("Przenieść sprawę do 'Zakończone'? Nie można cofnąć.")) {
-      setInProgress(p => p.filter(t => t.id !== task.id));
-      setCompleted(c => [...c, task]);
+      const updated = { ...task, status: "completed" };
+      updateTask(updated);
+      setTasks(prev => prev.map(t => (t.id === task.id ? updated : t)));
     }
   };
 
@@ -162,16 +188,37 @@ export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDelete
 
     if (tab === "profil") {
       return (
-        <div style={{ maxWidth: "400px" }}>
+        <div style={{ maxWidth: "500px" }}>
           <h3>Podgląd profilu</h3>
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "center", marginBottom: 20 }}>
             <img
               src={user?.avatar || "https://via.placeholder.com/120"}
               alt="avatar"
-              style={{ width: 120, height: 120, borderRadius: "50%" }}
+              style={{ width: 120, height: 120, borderRadius: "50%", objectFit: "cover" }}
             />
-            <h4>{user?.firstName} {user?.lastName}</h4>
+            <h4 style={{ marginTop: 10 }}>{user?.firstName} {user?.lastName}</h4>
           </div>
+          {user?.specialization && user.specialization.length > 0 && (
+            <div style={{ marginBottom: 10 }}>
+              <strong>Specjalizacje:</strong> {user.specialization.join(', ')}
+            </div>
+          )}
+          {user?.description && (
+            <div style={{ marginBottom: 10 }}>
+              <strong>Opis:</strong>
+              <p style={{ margin: '4px 0' }}>{user.description}</p>
+            </div>
+          )}
+          {user?.location && (
+            <div style={{ marginBottom: 10 }}>
+              <strong>Lokalizacja:</strong> {user.location}
+            </div>
+          )}
+          {user?.lawFirm && (
+            <div style={{ marginBottom: 10 }}>
+              <strong>Kancelaria:</strong> {user.lawFirm}
+            </div>
+          )}
         </div>
       );
     }

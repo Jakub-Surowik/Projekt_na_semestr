@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { loadUsers, saveUsers } from "../utils/userStorage";
 import "../styles/AuthModal.css";
 
 export default function AuthModal({ onClose, onLogin }) {
@@ -23,42 +24,10 @@ export default function AuthModal({ onClose, onLogin }) {
   const [error, setError] = useState("");
 
   // helper functions (call backend API, fallback to localStorage)
-  const API = "/api/users";
-
-  const loadUsers = async () => {
-    try {
-      const res = await fetch(API);
-      if (res.ok) return await res.json();
-    } catch {}
-    try {
-      return JSON.parse(localStorage.getItem("users") || "[]");
-    } catch {
-      return [];
-    }
-  };
-
-  const saveUsers = async (users) => {
-    try {
-      await fetch(API + "/bulk", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(users),
-      });
-    } catch {}
-    localStorage.setItem("users", JSON.stringify(users));
-  };
-
   const registerUser = async (user) => {
-    try {
-      await fetch(API, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
-      });
-    } catch {}
     const users = await loadUsers();
     users.push(user);
-    saveUsers(users);
+    await saveUsers(users);
   };
 
   const findUser = async (email, password) => {

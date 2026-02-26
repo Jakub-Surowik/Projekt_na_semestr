@@ -1,15 +1,22 @@
 // helpers for persisting tasks per lawyer
 // fallback to localStorage if backend unavailable
 
-const API = "/api/tasks";
+const API = process.env.REACT_APP_API_URL || "/api/tasks";
 
-export const loadTasks = async () => {
+const apiCall = async (url, options = {}) => {
   try {
-    const res = await fetch(API);
+    const res = await fetch(url, options);
     if (res.ok) return await res.json();
   } catch (e) {
-    // network failed, ignore
+    console.warn('API call failed, using localStorage:', e.message);
   }
+  return null;
+};
+
+export const loadTasks = async () => {
+  const result = await apiCall(API);
+  if (result) return result;
+  
   try {
     return JSON.parse(localStorage.getItem("tasks") || "[]");
   } catch {
@@ -18,15 +25,11 @@ export const loadTasks = async () => {
 };
 
 export const saveTasks = async (tasks) => {
-  try {
-    await fetch(API + "/bulk", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(tasks),
-    });
-  } catch (e) {
-    // ignore
-  }
+  await apiCall(`${API}/bulk`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(tasks),
+  });
   localStorage.setItem("tasks", JSON.stringify(tasks));
 };
 

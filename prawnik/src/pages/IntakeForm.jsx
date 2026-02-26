@@ -152,9 +152,9 @@ export default function IntakeForm({ initialDate, initialSlot, lawyerEmail, onSu
           </button>
           <h2 className="gold-text">Nowe Zlecenie</h2>
           {initialDate && (
-            <p>
-              Rezerwacja: {initialDate} {initialSlot}
-            </p>
+            <div style={{ backgroundColor: '#f5f5f5', padding: 12, borderRadius: 8, marginBottom: 20, borderLeft: '4px solid #b8860b' }}>
+              <strong>Rezerwacja:</strong> {initialDate} {initialSlot}
+            </div>
           )}
           {formMarkup}
         </div>

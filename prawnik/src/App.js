@@ -66,7 +66,7 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/search" element={<Search />} />
+        <Route path="/search" element={<Search user={user} />} />
         <Route path="/intake" element={<IntakeForm />} />
         <Route
           path="/dashboard"

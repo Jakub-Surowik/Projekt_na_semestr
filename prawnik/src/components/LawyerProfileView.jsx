@@ -207,7 +207,7 @@ export default function LawyerProfileView({ user, onClose }) {
               description: data.description,
               budget: data.budget
             };
-            await await addTask(newTask);
+            await addTask(newTask);
             setAppointments(prev => [...prev, { date: data.date, slot: data.slot }]);
             setBookingRequest(null);
           }}

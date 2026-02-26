@@ -2,6 +2,8 @@ import { useState } from "react";
 import { addTask } from "../utils/tasksStorage";
 
 export default function IntakeForm({ initialDate, initialSlot, lawyerEmail, onSubmit, onClose }) {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [budget, setBudget] = useState("");
@@ -15,6 +17,8 @@ export default function IntakeForm({ initialDate, initialSlot, lawyerEmail, onSu
   const handleSubmitForm = (e) => {
     e.preventDefault();
     const data = {
+      firstName,
+      lastName,
       type,
       description,
       budget,
@@ -28,10 +32,13 @@ export default function IntakeForm({ initialDate, initialSlot, lawyerEmail, onSu
       const task = {
         id: Date.now(),
         lawyerEmail: data.lawyerEmail,
-        title: `${data.type || "Zapytanie"}${data.date ? " " + data.date + " " + data.slot : ""}`.trim(),
+        title: `${data.type || "Zapytanie"} – ${data.firstName} ${data.lastName}`,
+        firstName: data.firstName,
+        lastName: data.lastName,
         status: "pending",
         date: data.date,
         slot: data.slot,
+        type: data.type,
         description: data.description,
         budget: data.budget,
         attachments: files.map(f => f.name)
@@ -44,6 +51,32 @@ export default function IntakeForm({ initialDate, initialSlot, lawyerEmail, onSu
 
   const formMarkup = (
     <form onSubmit={handleSubmitForm}>
+      <div style={{ marginBottom: 20 }}>
+        <label style={{ display: "block", marginBottom: "8px", fontWeight: "500" }}>
+          Imię
+        </label>
+        <input
+          type="text"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          placeholder="Twoje imię"
+          required
+        />
+      </div>
+
+      <div style={{ marginBottom: 20 }}>
+        <label style={{ display: "block", marginBottom: "8px", fontWeight: "500" }}>
+          Nazwisko
+        </label>
+        <input
+          type="text"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          placeholder="Twoje nazwisko"
+          required
+        />
+      </div>
+
       <div style={{ marginBottom: 20 }}>
         <label style={{ display: "block", marginBottom: "8px", fontWeight: "500" }}>
           Typ sprawy

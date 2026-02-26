@@ -33,18 +33,18 @@ function App() {
   };
 
   // update user/profile details
-  const handleUpdateUser = (updates) => {
+  const handleUpdateUser = async (updates) => {
     if (!user) return;
     const oldEmail = user.email;
     const updated = { ...user, ...updates };
     setUser(updated);
     setCurrentUser(updated);
-    storageUpdateUser(updated, oldEmail);
+    await storageUpdateUser(updated, oldEmail);
   };
 
-  const handleDeleteAccount = () => {
+  const handleDeleteAccount = async () => {
     if (!user) return;
-    storageDeleteUser(user.email);
+    await storageDeleteUser(user.email);
     handleLogout();
   };
 

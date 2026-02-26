@@ -3,31 +3,46 @@ import IntakeForm from "../pages/IntakeForm";
 import { getUserTasks, addTask } from "../utils/tasksStorage";
 
 export default function LawyerProfileView({ user, onClose }) {
-  // generate slots for weekdays and manage month navigation
+  // generate slots for weekdays and manage navigation by 6-day groups
   const slots = ["9:00-11:00", "11:00-13:00", "13:00-15:00"];
 
-  const generateDatesForMonth = (offset) => {
+  const generateSixDays = (groupOffset) => {
     const now = new Date();
-    const m = new Date(now.getFullYear(), now.getMonth() + offset, 1);
+    now.setHours(0, 0, 0, 0);
+    
     const dates = [];
-    while (m.getMonth() === now.getMonth() + offset) {
-      const day = m.getDay(); // 0 Sunday, 1 Monday...
-      if (day >= 1 && day <= 5) { // Mon-Fri
-        dates.push(new Date(m));
-      }
-      m.setDate(m.getDate() + 1);
+    let currentDate = new Date(now);
+    let daysAdded = 0;
+    
+    // Skip to the correct group (each group is 6 working days)
+    if (groupOffset > 0) {
+      currentDate.setDate(currentDate.getDate() + groupOffset * 6);
     }
+    
+    // Collect 6 working days (Mon-Fri)
+    while (daysAdded < 6) {
+      const day = currentDate.getDay(); // 0 Sunday, 1 Monday...
+      if (day >= 1 && day <= 5) { // Mon-Fri only
+        dates.push(new Date(currentDate));
+        daysAdded++;
+      }
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+    
     return dates;
   };
 
   const [appointments, setAppointments] = useState([]); // array of {date: 'YYYY-MM-DD', slot}
-  const [monthOffset, setMonthOffset] = useState(0); // 0 = current month
+  const [groupOffset, setGroupOffset] = useState(0); // 0 = this week's 6 days
 
   // load existing bookings (from tasks) for this lawyer
   useEffect(() => {
-    const tasks = getUserTasks(user.email);
-    const book = tasks.filter(t => t.date && t.slot).map(t => ({ date: t.date, slot: t.slot }));
-    setAppointments(book);
+    const load = async () => {
+      const tasks = await getUserTasks(user.email);
+      const book = tasks.filter(t => t.date && t.slot).map(t => ({ date: t.date, slot: t.slot }));
+      setAppointments(book);
+    };
+    load();
   }, [user]);
 
   const [bookingRequest, setBookingRequest] = useState(null);
@@ -75,54 +90,99 @@ export default function LawyerProfileView({ user, onClose }) {
       )}
 
       <h3>Kalendarz</h3>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 10, gap: 10 }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 15, marginBottom: 10 }}>
         <button
-          onClick={() => setMonthOffset(m => Math.max(0, m - 1))}
-          disabled={monthOffset === 0}
-          className="btn-gold"
+          onClick={() => setGroupOffset(g => Math.max(0, g - 1))}
+          disabled={groupOffset === 0}
+          style={{
+            background: groupOffset === 0 ? '#ccc' : '#b8860b',
+            border: 'none',
+            width: 40,
+            height: 40,
+            borderRadius: '50%',
+            fontSize: 24,
+            cursor: groupOffset === 0 ? 'not-allowed' : 'pointer',
+            color: 'white',
+            fontWeight: 'bold',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 0,
+            flexShrink: 0,
+            marginTop: 32
+          }}
         >◀</button>
-        <span style={{ fontWeight: 'bold' }}>{new Date(new Date().getFullYear(), new Date().getMonth() + monthOffset).toLocaleString('default', { month: 'long', year: 'numeric' })}</span>
+        
+        <div style={{ flex: 1 }}>
+          <span style={{ fontWeight: 'bold', textAlign: 'center', display: 'block', marginBottom: 10 }}>
+            {(() => {
+              const dates = generateSixDays(groupOffset);
+              if (dates.length === 0) return '';
+              const firstDate = dates[0];
+              const lastDate = dates[dates.length - 1];
+              return `${firstDate.toLocaleDateString('pl-PL')} - ${lastDate.toLocaleDateString('pl-PL')}`;
+            })()}
+          </span>
+          <div className="calendar-wrapper" style={{ width: "100%", overflowX: "auto" }}>
+            <table style={{ borderCollapse: "collapse", minWidth: "600px" }}>
+            <thead>
+              <tr>
+                <th></th>
+                {generateSixDays(groupOffset).map(d => (
+                  <th key={d.toISOString()} style={{ padding: 8, border: "1px solid #ddd" }}>
+                    <div style={{ fontWeight: 'bold' }}>{d.toLocaleDateString('pl-PL', { weekday: 'short' })}</div>
+                    <div>{d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'numeric' })}</div>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {slots.map(slot => (
+                <tr key={slot}>
+                  <td style={{ padding: 8, border: "1px solid #ddd" }}>{slot}</td>
+                  {generateSixDays(groupOffset).map(d => {
+                    const dateStr = d.toISOString().split('T')[0];
+                    return (
+                      <td key={dateStr + slot} style={{ padding: 8, border: "1px solid #ddd", textAlign: "center" }}>
+                        <button
+                          disabled={isBooked(dateStr, slot)}
+                          onClick={() => handleBook(dateStr, slot)}
+                          className="btn-gold"
+                          style={{ padding: "6px 12px", fontSize: 12 }}
+                        >
+                          {isBooked(dateStr, slot) ? "Zarezerwowane" : "Rezerwuj"}
+                        </button>
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          </div>
+        </div>
+        
         <button
-          onClick={() => setMonthOffset(m => Math.min(2, m + 1))}
-          disabled={monthOffset === 2}
-          className="btn-gold"
+          onClick={() => setGroupOffset(g => Math.min(60, g + 1))}
+          disabled={groupOffset >= 60}
+          style={{
+            background: groupOffset >= 60 ? '#ccc' : '#b8860b',
+            border: 'none',
+            width: 40,
+            height: 40,
+            borderRadius: '50%',
+            fontSize: 24,
+            cursor: groupOffset >= 60 ? 'not-allowed' : 'pointer',
+            color: 'white',
+            fontWeight: 'bold',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 0,
+            flexShrink: 0,
+            marginTop: 32
+          }}
         >▶</button>
-      </div>
-      <div className="calendar-wrapper" style={{ width: "100%", overflowX: "auto" }}>
-        <table style={{ borderCollapse: "collapse", minWidth: "600px" }}>
-        <thead>
-          <tr>
-            <th></th>
-            {generateDatesForMonth(monthOffset).map(d => (
-              <th key={d.toISOString()} style={{ padding: 8, border: "1px solid #ddd" }}>
-                {d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'numeric', weekday: 'short' })}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {slots.map(slot => (
-            <tr key={slot}>
-              <td style={{ padding: 8, border: "1px solid #ddd" }}>{slot}</td>
-              {generateDatesForMonth(monthOffset).map(d => {
-                const dateStr = d.toISOString().split('T')[0];
-                return (
-                  <td key={dateStr + slot} style={{ padding: 8, border: "1px solid #ddd", textAlign: "center" }}>
-                    <button
-                      disabled={isBooked(dateStr, slot)}
-                      onClick={() => handleBook(dateStr, slot)}
-                      className="btn-gold"
-                      style={{ padding: "6px 12px", fontSize: 12 }}
-                    >
-                      {isBooked(dateStr, slot) ? "Zarezerwowane" : "Rezerwuj"}
-                    </button>
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
       </div>
 
       {/* booking request form modal */}
@@ -132,21 +192,22 @@ export default function LawyerProfileView({ user, onClose }) {
           initialSlot={bookingRequest.slot}
           lawyerEmail={user.email}
           onClose={() => setBookingRequest(null)}
-          onSubmit={(data) => {
+          onSubmit={async (data) => {
             // create a task with the provided data
             const newTask = {
               id: Date.now(),
               lawyerEmail: data.lawyerEmail,
-              title: data.type
-                ? `${data.type} ${data.date || ''} ${data.slot || ''}`.trim()
-                : `Spotkanie ${data.date} ${data.slot}`,
+              firstName: data.firstName,
+              lastName: data.lastName,
+              title: `${data.type} – ${data.firstName} ${data.lastName}`,
               status: "pending",
               date: data.date,
               slot: data.slot,
+              type: data.type,
               description: data.description,
               budget: data.budget
             };
-            addTask(newTask);
+            await await addTask(newTask);
             setAppointments(prev => [...prev, { date: data.date, slot: data.slot }]);
             setBookingRequest(null);
           }}

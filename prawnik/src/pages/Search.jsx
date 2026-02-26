@@ -7,8 +7,11 @@ export default function Search() {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    const all = loadUsers();
-    setLawyers(all.filter(u => u.isLawyer));
+    const fetch = async () => {
+      const all = await loadUsers();
+      setLawyers(all.filter(u => u.isLawyer));
+    };
+    fetch();
   }, []);
 
 

@@ -22,8 +22,14 @@ export default function AuthModal({ onClose, onLogin }) {
   });
   const [error, setError] = useState("");
 
-  // helper functions for localStorage-based user store
-  const loadUsers = () => {
+  // helper functions (call backend API, fallback to localStorage)
+  const API = "/api/users";
+
+  const loadUsers = async () => {
+    try {
+      const res = await fetch(API);
+      if (res.ok) return await res.json();
+    } catch {}
     try {
       return JSON.parse(localStorage.getItem("users") || "[]");
     } catch {
@@ -31,18 +37,32 @@ export default function AuthModal({ onClose, onLogin }) {
     }
   };
 
-  const saveUsers = (users) => {
+  const saveUsers = async (users) => {
+    try {
+      await fetch(API + "/bulk", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(users),
+      });
+    } catch {}
     localStorage.setItem("users", JSON.stringify(users));
   };
 
-  const registerUser = (user) => {
-    const users = loadUsers();
+  const registerUser = async (user) => {
+    try {
+      await fetch(API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
+    } catch {}
+    const users = await loadUsers();
     users.push(user);
     saveUsers(users);
   };
 
-  const findUser = (email, password) => {
-    const users = loadUsers();
+  const findUser = async (email, password) => {
+    const users = await loadUsers();
     return users.find(u => u.email === email && u.password === password);
   };
 
@@ -51,14 +71,14 @@ export default function AuthModal({ onClose, onLogin }) {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     if (isLogin) {
       // try to authenticate against stored users
       if (formData.email && formData.password) {
-        const existing = findUser(formData.email, formData.password);
+        const existing = await findUser(formData.email, formData.password);
         if (existing) {
           const { password, ...pubUser } = existing;
           onLogin(pubUser);
@@ -106,7 +126,7 @@ export default function AuthModal({ onClose, onLogin }) {
           formData.pesel &&
           formData.birthDate
         ) {
-          const users = loadUsers();
+          const users = await loadUsers();
           const already = users.find(u => u.email === formData.email);
           if (already) {
             setError("Użytkownik o takim emailu już istnieje");
@@ -130,7 +150,7 @@ export default function AuthModal({ onClose, onLogin }) {
             isLawyer: true
           };
 
-          registerUser(newUser);
+          await registerUser(newUser);
           const { password, ...pubUser } = newUser;
           onLogin(pubUser);
           // reset

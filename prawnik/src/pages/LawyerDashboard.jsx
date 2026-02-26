@@ -12,6 +12,7 @@ export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDelete
   const navigate = useNavigate();
   const [tab, setTab] = useState("sprawy");
   const [profileData, setProfileData] = useState({});
+  const [selectedTask, setSelectedTask] = useState(null);
 
   // task state stored in array, computed into columns
   const [tasks, setTasks] = useState([]);
@@ -30,22 +31,25 @@ export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDelete
   // load tasks for current lawyer and create defaults if none
   useEffect(() => {
     if (!user) return;
-    const userTasks = getUserTasks(user.email);
-    if (userTasks.length === 0) {
-      const now = Date.now();
-      // add sample entries
-      initialTasks.forEach((t, idx) => {
-        addTask({
-          id: now + idx,
-          lawyerEmail: user.email,
-          title: t.title,
-          status: "pending"
-        });
-      });
-      setTasks(getUserTasks(user.email));
-    } else {
+    const fetchTasks = async () => {
+      let userTasks = await getUserTasks(user.email);
+      if (userTasks.length === 0) {
+        const now = Date.now();
+        // add sample entries
+        for (let idx = 0; idx < initialTasks.length; idx++) {
+          const t = initialTasks[idx];
+          await addTask({
+            id: now + idx,
+            lawyerEmail: user.email,
+            title: t.title,
+            status: "pending"
+          });
+        }
+        userTasks = await getUserTasks(user.email);
+      }
       setTasks(userTasks);
-    }
+    };
+    fetchTasks();
   }, [user]);
 
   const handleChange = (e) => {
@@ -69,18 +73,18 @@ export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDelete
     reader.readAsDataURL(file);
   };
 
-  const moveToInProgress = (task) => {
+  const moveToInProgress = async (task) => {
     if (window.confirm("Przenieść sprawę do 'W toku'? Nie można cofnąć.")) {
       const updated = { ...task, status: "inProgress" };
-      updateTask(updated);
+      await updateTask(updated);
       setTasks(prev => prev.map(t => (t.id === task.id ? updated : t)));
     }
   };
 
-  const moveToCompleted = (task) => {
+  const moveToCompleted = async (task) => {
     if (window.confirm("Przenieść sprawę do 'Zakończone'? Nie można cofnąć.")) {
       const updated = { ...task, status: "completed" };
-      updateTask(updated);
+      await updateTask(updated);
       setTasks(prev => prev.map(t => (t.id === task.id ? updated : t)));
     }
   };
@@ -88,15 +92,37 @@ export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDelete
   const renderContent = () => {
     if (tab === "sprawy") {
       return (
+        <>
         <div style={{ display: "flex", gap: 20 }}>
           <div style={{ flex: 1 }}>
             <h3>Oczekujące</h3>
             {pending.map(task => (
-              <div className="card" key={task.id} style={{ marginBottom: 10 }}>
-                <p>{task.title}</p>
+              <div 
+                className="card" 
+                key={task.id} 
+                style={{ marginBottom: 10, cursor: 'pointer' }}
+                onClick={() => setSelectedTask(task)}
+              >
+                <p style={{ margin: 0 }}>
+                  <strong>{task.type || task.title}</strong>
+                  {task.firstName && task.lastName && (
+                    <div style={{ fontSize: '0.9em', color: '#666', marginTop: 4 }}>
+                      {task.firstName} {task.lastName}
+                    </div>
+                  )}
+                  {task.date && (
+                    <div style={{ fontSize: '0.85em', color: '#999', marginTop: 2 }}>
+                      {task.date} {task.slot || ''}
+                    </div>
+                  )}
+                </p>
                 <button
                   className="btn-gold"
-                  onClick={() => moveToInProgress(task)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    moveToInProgress(task);
+                  }}
+                  style={{ marginTop: 8 }}
                 >
                   W toku →
                 </button>
@@ -106,11 +132,32 @@ export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDelete
           <div style={{ flex: 1 }}>
             <h3>W toku</h3>
             {inProgress.map(task => (
-              <div className="card" key={task.id} style={{ marginBottom: 10 }}>
-                <p>{task.title}</p>
+              <div 
+                className="card" 
+                key={task.id} 
+                style={{ marginBottom: 10, cursor: 'pointer' }}
+                onClick={() => setSelectedTask(task)}
+              >
+                <p style={{ margin: 0 }}>
+                  <strong>{task.type || task.title}</strong>
+                  {task.firstName && task.lastName && (
+                    <div style={{ fontSize: '0.9em', color: '#666', marginTop: 4 }}>
+                      {task.firstName} {task.lastName}
+                    </div>
+                  )}
+                  {task.date && (
+                    <div style={{ fontSize: '0.85em', color: '#999', marginTop: 2 }}>
+                      {task.date} {task.slot || ''}
+                    </div>
+                  )}
+                </p>
                 <button
                   className="btn-gold"
-                  onClick={() => moveToCompleted(task)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    moveToCompleted(task);
+                  }}
+                  style={{ marginTop: 8 }}
                 >
                   Zakończ →
                 </button>
@@ -120,12 +167,130 @@ export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDelete
           <div style={{ flex: 1 }}>
             <h3>Zakończone</h3>
             {completed.map(task => (
-              <div className="card" key={task.id} style={{ marginBottom: 10 }}>
-                <p>{task.title}</p>
+              <div 
+                className="card" 
+                key={task.id} 
+                style={{ marginBottom: 10, cursor: 'pointer' }}
+                onClick={() => setSelectedTask(task)}
+              >
+                <p style={{ margin: 0 }}>
+                  <strong>{task.type || task.title}</strong>
+                  {task.firstName && task.lastName && (
+                    <div style={{ fontSize: '0.9em', color: '#666', marginTop: 4 }}>
+                      {task.firstName} {task.lastName}
+                    </div>
+                  )}
+                  {task.date && (
+                    <div style={{ fontSize: '0.85em', color: '#999', marginTop: 2 }}>
+                      {task.date} {task.slot || ''}
+                    </div>
+                  )}
+                </p>
               </div>
             ))}
           </div>
         </div>
+
+        {/* detailed task modal */}
+        {selectedTask && (
+          <div 
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'rgba(0,0,0,0.5)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 1000
+            }}
+            onClick={() => setSelectedTask(null)}
+          >
+            <div 
+              className="card"
+              style={{
+                maxWidth: '600px',
+                width: '90%',
+                maxHeight: '80vh',
+                overflowY: 'auto',
+                position: 'relative'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                style={{
+                  position: 'absolute',
+                  top: 10,
+                  right: 10,
+                  background: 'none',
+                  border: 'none',
+                  fontSize: 24,
+                  cursor: 'pointer'
+                }}
+                onClick={() => setSelectedTask(null)}
+              >
+                ×
+              </button>
+              <h3>{selectedTask.type}</h3>
+              <div style={{ marginBottom: 15 }}>
+                <strong>Klient:</strong> {selectedTask.firstName} {selectedTask.lastName}
+              </div>
+              {selectedTask.date && (
+                <div style={{ marginBottom: 15 }}>
+                  <strong>Rezerwacja:</strong> {selectedTask.date} {selectedTask.slot}
+                </div>
+              )}
+              {selectedTask.description && (
+                <div style={{ marginBottom: 15 }}>
+                  <strong>Opis sprawy:</strong>
+                  <p style={{ margin: '8px 0 0 0', whiteSpace: 'pre-wrap' }}>{selectedTask.description}</p>
+                </div>
+              )}
+              {selectedTask.budget && (
+                <div style={{ marginBottom: 15 }}>
+                  <strong>Budżet:</strong> {selectedTask.budget} zł
+                </div>
+              )}
+              {selectedTask.attachments && selectedTask.attachments.length > 0 && (
+                <div style={{ marginBottom: 15 }}>
+                  <strong>Załączniki:</strong>
+                  <ul style={{ margin: '8px 0 0 0', paddingLeft: 20 }}>
+                    {selectedTask.attachments.map((att, idx) => (
+                      <li key={idx}>{att}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              <div style={{ marginTop: 20, display: 'flex', gap: 10 }}>
+                {selectedTask.status === 'pending' && (
+                  <button
+                    className="btn-gold"
+                    onClick={async () => {
+                      await moveToInProgress(selectedTask);
+                      setSelectedTask(null);
+                    }}
+                  >
+                    Przenieś do 'W toku'
+                  </button>
+                )}
+                {selectedTask.status === 'inProgress' && (
+                  <button
+                    className="btn-gold"
+                    onClick={async () => {
+                      await moveToCompleted(selectedTask);
+                      setSelectedTask(null);
+                    }}
+                  >
+                    Przenieś do 'Zakończone'
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+        </>
       );
     }
 

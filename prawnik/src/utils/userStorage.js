@@ -13,19 +13,32 @@ const apiCall = async (url, options = {}) => {
 
 export const loadUsers = async () => {
   const result = await apiCall(API);
-  if (result) {
+
+  if (Array.isArray(result) && result.length > 0) {
     console.log('loadUsers fetched from API', result);
+    localStorage.setItem("users", JSON.stringify(result));
     return result;
   }
-  
-  try {
-    const stored = localStorage.getItem("users");
-    console.log('loadUsers fallback localStorage', stored);
-    return JSON.parse(stored || "[]");
-  } catch (e) {
-    console.error('loadUsers parse error', e);
-    return [];
+
+  if (Array.isArray(result) && result.length === 0) {
+    console.log('loadUsers API empty array, trying localStorage fallback');
   }
+
+  if (result === null || result === undefined || (Array.isArray(result) && result.length === 0)) {
+    try {
+      const stored = localStorage.getItem("users");
+      console.log('loadUsers fallback localStorage', stored);
+      if (stored) {
+        return JSON.parse(stored);
+      }
+      return [];
+    } catch (e) {
+      console.error('loadUsers parse error', e);
+      return [];
+    }
+  }
+
+  return [];
 };
 
 export const saveUsers = async (users) => {

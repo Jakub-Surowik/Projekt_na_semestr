@@ -6,6 +6,9 @@ export default function Search({ user }) {
   const [lawyers, setLawyers] = useState([]);
   const [selected, setSelected] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [roleFilter, setRoleFilter] = useState("");
+  const [specializationFilter, setSpecializationFilter] = useState("");
 
   const fetchLawyers = async () => {
     setLoading(true);
@@ -29,14 +32,29 @@ export default function Search({ user }) {
       <div className="container" style={{ padding: "60px 0" }}>
         <h2 className="gold-text">Znajdź Prawnika</h2>
         
-        <div style={{ marginBottom: 20 }}>
-          <button 
-            className="btn-gold"
-            onClick={fetchLawyers}
-            disabled={loading}
-          >
-            {loading ? "Ładuje..." : "Odśwież listę"}
-          </button>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px', marginBottom: 20 }}>
+          <input
+            type="text"
+            placeholder="Szukaj"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{ padding: 8 }}
+          />
+          <select value={roleFilter} onChange={(e) => setRoleFilter(e.target.value)} style={{ padding: 8 }}>
+            <option value="">Wszystkie zawody</option>
+            <option value="Adwokat">Adwokat</option>
+            <option value="Radca Prawny">Radca Prawny</option>
+            <option value="Notariusz">Notariusz</option>
+            <option value="Komornik">Komornik</option>
+          </select>
+          <select value={specializationFilter} onChange={(e) => setSpecializationFilter(e.target.value)} style={{ padding: 8 }}>
+            <option value="">Wszystkie specjalizacje</option>
+            <option value="sprawa karna">sprawa karna</option>
+            <option value="sprawa cywilna">sprawa cywilna</option>
+            <option value="sprawa rodzinna">sprawa rodzinna</option>
+            <option value="sprawa pracy">sprawa pracy</option>
+            <option value="sprawa nieruchomości">sprawa nieruchomości</option>
+          </select>
         </div>
 
         {lawyers.length === 0 && !loading && (
@@ -46,13 +64,25 @@ export default function Search({ user }) {
         )}
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 20, marginTop: 30 }}>
-          {lawyers.map(l => (
-            <div
-              key={l.email}
-              className="card"
-              style={{ cursor: "pointer" }}
-              onClick={() => setSelected(l)}
-            >
+          {lawyers
+            .filter((l) => {
+              const fullName = `${l.firstName || ""} ${l.lastName || ""}`.toLowerCase();
+              const term = searchTerm.trim().toLowerCase();
+              if (term && !fullName.includes(term)) return false;
+              if (roleFilter && l.role !== roleFilter) return false;
+              if (specializationFilter) {
+                const specs = Array.isArray(l.specialization) ? l.specialization : [];
+                if (!specs.some((s) => s.toLowerCase().includes(specializationFilter.toLowerCase()))) return false;
+              }
+              return true;
+            })
+            .map(l => (
+              <div
+                key={l.email}
+                className="card"
+                style={{ cursor: "pointer" }}
+                onClick={() => setSelected(l)}
+              >
               <h4>{l.firstName} {l.lastName}</h4>
               {l.specialization && l.specialization.length > 0 && (
                 <p style={{ fontSize: 12 }}>{l.specialization.join(', ')}</p>

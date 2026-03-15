@@ -1,16 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap');
 
 :root {
-  --gold: #C6A75E;
-  --gold-light: #E5C97A;
-  --bg-light: #f8f8f8;
+  --primary: #103f7f;
+  --primary-light: #3f72c5;
+  --accent: #f7b500;
+  --accent-light: #f9c760;
+  --bg-light: #eef4ff;
   --text-dark: #1f1f1f;
 }
+
+.app-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 40px;
+  box-shadow: 0 2px 12px rgba(16, 63, 127, 0.18);
+  background: linear-gradient(95deg, rgba(16, 63, 127, 0.08), rgba(255, 255, 255, 0.9));
+  border-bottom: 2px solid rgba(62, 107, 192, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(6px);
+}
+
+.app-navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.app-navbar .brand-title {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.app-navbar .brand-subtitle {
+  display: block;
+  font-size: 0.8rem;
+  color: #3f5e91;
+}
+
+.app-navbar a, .app-navbar span {
+  color: #344676;
+  text-decoration: none;
+}
+
 
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: white;
+  background: var(--bg-light);
   color: var(--text-dark);
 }
 
@@ -24,22 +66,23 @@ h1, h2, h3 {
 }
 
 .gold-text {
-  color: var(--gold);
+  color: var(--accent);
 }
 
 .btn-gold {
-  background: var(--gold);
-  color: white;
+  background: var(--accent);
+  color: #0a2a66;
   padding: 12px 24px;
   border-radius: 12px;
-  border: none;
+  border: 1px solid #e3a530;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: 0.25s ease;
 }
 
 .btn-gold:hover {
-  background: var(--gold-light);
-  transform: translateY(-2px);
+  background: var(--accent-light);
+  box-shadow: 0 8px 14px rgba(247, 181, 0, 0.35);
+  transform: translateY(-1px);
 }
 
 .card {

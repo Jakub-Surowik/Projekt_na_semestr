@@ -1,11 +1,27 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserTasks, addTask, updateTask } from "../utils/tasksStorage";
 
 // simple sample data used when user has no tasks yet
 const initialTasks = [
-  { title: "Sprzeciw od nakazu – Jan Kowalski" },
-  { title: "Pozew o zapłatę – Sp. z o.o." }
+  {
+    title: "Sprzeciw od nakazu – Jan Kowalski",
+    firstName: "Jan",
+    lastName: "Kowalski",
+    type: "Sprzeciw od nakazu",
+    description: "Klient otrzymał nakaz zapłaty, potrzebuje przygotować sprzeciw i zebrać dokumenty.",
+    budget: "1200",
+    attachments: ["umowa.pdf", "dokumenty.zip"]
+  },
+  {
+    title: "Pozew o zapłatę – Sp. z o.o.",
+    firstName: "Anna",
+    lastName: "Nowak",
+    type: "Pozew o zapłatę",
+    description: "Spółka domaga się zapłaty zaległej faktury za usługi IT, termin pilny.",
+    budget: "2500",
+    attachments: ["faktura.pdf"]
+  }
 ];
 
 export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDeleteAccount }) {
@@ -13,6 +29,7 @@ export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDelete
   const [tab, setTab] = useState("sprawy");
   const [profileData, setProfileData] = useState({});
   const [selectedTask, setSelectedTask] = useState(null);
+  const [loadingTasks, setLoadingTasks] = useState(false);
 
   // task state stored in array, computed into columns
   const [tasks, setTasks] = useState([]);
@@ -29,28 +46,48 @@ export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDelete
   }, [tab, user]);
 
   // load tasks for current lawyer and create defaults if none
-  useEffect(() => {
+  const fetchTasks = useCallback(async () => {
     if (!user) return;
-    const fetchTasks = async () => {
-      let userTasks = await getUserTasks(user.email);
-      if (userTasks.length === 0) {
-        const now = Date.now();
-        // add sample entries
-        for (let idx = 0; idx < initialTasks.length; idx++) {
-          const t = initialTasks[idx];
-          await addTask({
-            id: now + idx,
-            lawyerEmail: user.email,
-            title: t.title,
-            status: "pending"
-          });
-        }
-        userTasks = await getUserTasks(user.email);
+    setLoadingTasks(true);
+    let userTasks = await getUserTasks(user.email);
+
+    if (userTasks.length === 0) {
+      const now = Date.now();
+      // add sample entries only first time
+      for (let idx = 0; idx < initialTasks.length; idx++) {
+        const t = initialTasks[idx];
+        await addTask({
+          id: now + idx,
+          lawyerEmail: user.email,
+          title: t.title,
+          status: "pending",
+          firstName: t.firstName || "",
+          lastName: t.lastName || "",
+          type: t.type || "",
+          description: t.description || "",
+          budget: t.budget || "",
+          attachments: t.attachments || []
+        });
       }
-      setTasks(userTasks);
-    };
-    fetchTasks();
+      userTasks = await getUserTasks(user.email);
+    }
+
+    setTasks(userTasks);
+    setLoadingTasks(false);
   }, [user]);
+
+  useEffect(() => {
+    fetchTasks();
+
+    const handleStorage = (event) => {
+      if (event.key === "tasks" || event.key === "tasks-updated") {
+        fetchTasks();
+      }
+    };
+
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, [fetchTasks]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -93,6 +130,17 @@ export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDelete
     if (tab === "sprawy") {
       return (
         <>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+          <h3>Sprawy</h3>
+          <button
+            className="btn-gold"
+            onClick={fetchTasks}
+            disabled={loadingTasks}
+            style={{ width: 130 }}
+          >
+            {loadingTasks ? "Ładowanie..." : "Odśwież"}
+          </button>
+        </div>
         <div style={{ display: "flex", gap: 20 }}>
           <div style={{ flex: 1 }}>
             <h3>Oczekujące</h3>
@@ -233,7 +281,10 @@ export default function LawyerDashboard({ user, onLogout, onUpdateUser, onDelete
               >
                 ×
               </button>
-              <h3>{selectedTask.type}</h3>
+              <h3>{selectedTask.title || selectedTask.type || "Szczegóły sprawy"}</h3>
+              <div style={{ marginBottom: 8 }}>
+                <strong>Status:</strong> {selectedTask.status || "pending"}
+              </div>
               <div style={{ marginBottom: 15 }}>
                 <strong>Klient:</strong> {selectedTask.firstName} {selectedTask.lastName}
               </div>

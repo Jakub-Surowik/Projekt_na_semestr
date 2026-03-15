@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AuthModal from "./AuthModal";
+import logo from "../assets/images/logo.png";
 
 export default function Navbar({ isLoggedIn, user, onLogout, onLogin }) {
   const navigate = useNavigate();
@@ -15,15 +16,10 @@ export default function Navbar({ isLoggedIn, user, onLogout, onLogin }) {
 
   return (
     <>
-      <div style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "20px 40px",
-        boxShadow: "0 2px 10px rgba(0,0,0,0.05)"
-      }}>
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <h2 className="gold-text" style={{ margin: 0, cursor: "pointer" }}>LexConnect</h2>
+      <div className="app-navbar">
+        <Link to="/" className="brand">
+          <img src={logo} alt="LexConnect logo" style={{ width: '44px', height: '44px', objectFit: 'contain' }} />
+          <h2 className="brand-title">LexConnect</h2>
         </Link>
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <Link to="/search" style={{ marginRight: 10, textDecoration: "none", color: "inherit" }}>

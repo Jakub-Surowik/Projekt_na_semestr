@@ -14,7 +14,7 @@ export default function IntakeForm({ initialDate, initialSlot, lawyerEmail, onSu
     setFiles(Array.from(e.target.files));
   };
 
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = async (e) => {
     e.preventDefault();
     const data = {
       firstName,
@@ -25,9 +25,10 @@ export default function IntakeForm({ initialDate, initialSlot, lawyerEmail, onSu
       date: initialDate || null,
       slot: initialSlot || null,
       lawyerEmail: lawyerEmail || null,
+      attachments: files.map(f => f.name)
     };
     if (onSubmit) {
-      onSubmit(data);
+      await onSubmit(data);
     } else {
       const task = {
         id: Date.now(),
@@ -43,7 +44,7 @@ export default function IntakeForm({ initialDate, initialSlot, lawyerEmail, onSu
         budget: data.budget,
         attachments: files.map(f => f.name)
       };
-      addTask(task);
+      await addTask(task);
       setSubmitted(true);
     }
     if (onClose) onClose();
@@ -87,11 +88,12 @@ export default function IntakeForm({ initialDate, initialSlot, lawyerEmail, onSu
           required
         >
           <option value="">-- Wybierz typ sprawy --</option>
-          <option>Pozew o zapłatę</option>
-          <option>Sprzeciw od nakazu</option>
-          <option>Sprawy rodzinne</option>
-          <option>Prawo pracy</option>
-          <option>Nieruchomości</option>
+          <option value="sprawa karna">sprawa karna</option>
+          <option value="sprawa cywilna">sprawa cywilna</option>
+          <option value="sprawa rodzinna">sprawa rodzinna</option>
+          <option value="sprawa pracy">sprawa pracy</option>
+          <option value="sprawa nieruchomości">sprawa nieruchomości</option>
+          <option value="inne">inne</option>
         </select>
       </div>
 

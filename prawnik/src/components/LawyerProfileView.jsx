@@ -205,10 +205,10 @@ export default function LawyerProfileView({ user, onClose }) {
               slot: data.slot,
               type: data.type,
               description: data.description,
-              budget: data.budget
+              budget: data.budget,
+              attachments: data.attachments || []
             };
-            await addTask(newTask);
-            setAppointments(prev => [...prev, { date: data.date, slot: data.slot }]);
+            await addTask(newTask);            localStorage.setItem("tasks-updated", Date.now().toString());            setAppointments(prev => [...prev, { date: data.date, slot: data.slot }]);
             setBookingRequest(null);
           }}
         />

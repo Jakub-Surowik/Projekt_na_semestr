@@ -15,13 +15,25 @@ const apiCall = async (url, options = {}) => {
 
 export const loadTasks = async () => {
   const result = await apiCall(API);
-  if (result) return result;
-  
-  try {
-    return JSON.parse(localStorage.getItem("tasks") || "[]");
-  } catch {
-    return [];
+
+  if (Array.isArray(result) && result.length > 0) {
+    localStorage.setItem("tasks", JSON.stringify(result));
+    return result;
   }
+
+  if (Array.isArray(result) && result.length === 0) {
+    console.log("loadTasks API empty array, trying localStorage fallback");
+  }
+
+  if (result === null || result === undefined || (Array.isArray(result) && result.length === 0)) {
+    try {
+      return JSON.parse(localStorage.getItem("tasks") || "[]");
+    } catch {
+      return [];
+    }
+  }
+
+  return [];
 };
 
 export const saveTasks = async (tasks) => {

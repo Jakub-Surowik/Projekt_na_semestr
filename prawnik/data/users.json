@@ -1,1 +1,656 @@
-[]
+[
+  {
+    "firstName": "Anna",
+    "lastName": "Nowak",
+    "email": "anna.nowak0@example.com",
+    "password": "Haslo123!",
+    "role": "Adwokat",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa karna",
+      "sprawa cywilna",
+      "sprawa rodzinna"
+    ],
+    "location": "Warszawa",
+    "lawFirm": "Kancelaria PrawoPlus",
+    "description": "Doświadczony adwokat z wieloletnią praktyką w zakresie sprawa karna, sprawa cywilna, sprawa rodzinna.",
+    "avatar": "https://randomuser.me/api/portraits/women/0.jpg"
+  },
+  {
+    "firstName": "Jan",
+    "lastName": "Kowalski",
+    "email": "jan.kowalski1@example.com",
+    "password": "Haslo123!",
+    "role": "Radca Prawny",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa cywilna",
+      "sprawa rodzinna"
+    ],
+    "location": "Kraków",
+    "lawFirm": "Lex & Partnerzy",
+    "description": "Doświadczony radca prawny z wieloletnią praktyką w zakresie sprawa cywilna, sprawa rodzinna.",
+    "avatar": "https://randomuser.me/api/portraits/men/1.jpg"
+  },
+  {
+    "firstName": "Michał",
+    "lastName": "Wiśniewski",
+    "email": "michał.wiśniewski2@example.com",
+    "password": "Haslo123!",
+    "role": "Notariusz",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa rodzinna",
+      "sprawa pracy"
+    ],
+    "location": "Wrocław",
+    "lawFirm": "Prawo 24",
+    "description": "Doświadczony notariusz z wieloletnią praktyką w zakresie sprawa rodzinna, sprawa pracy.",
+    "avatar": "https://randomuser.me/api/portraits/women/2.jpg"
+  },
+  {
+    "firstName": "Katarzyna",
+    "lastName": "Wójcik",
+    "email": "katarzyna.wójcik3@example.com",
+    "password": "Haslo123!",
+    "role": "Komornik",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa pracy",
+      "sprawa nieruchomości",
+      "prawo korporacyjne"
+    ],
+    "location": "Gdańsk",
+    "lawFirm": "Adwokaci i Radcy",
+    "description": "Doświadczony komornik z wieloletnią praktyką w zakresie sprawa pracy, sprawa nieruchomości, prawo korporacyjne.",
+    "avatar": "https://randomuser.me/api/portraits/men/3.jpg"
+  },
+  {
+    "firstName": "Paweł",
+    "lastName": "Kowalczyk",
+    "email": "paweł.kowalczyk4@example.com",
+    "password": "Haslo123!",
+    "role": "Adwokat",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa nieruchomości",
+      "prawo korporacyjne"
+    ],
+    "location": "Poznań",
+    "lawFirm": "Notus Kancelaria",
+    "description": "Doświadczony adwokat z wieloletnią praktyką w zakresie sprawa nieruchomości, prawo korporacyjne.",
+    "avatar": "https://randomuser.me/api/portraits/women/4.jpg"
+  },
+  {
+    "firstName": "Magdalena",
+    "lastName": "Kamiński",
+    "email": "magdalena.kamiński5@example.com",
+    "password": "Haslo123!",
+    "role": "Radca Prawny",
+    "isLawyer": true,
+    "specialization": [
+      "prawo korporacyjne",
+      "prawo podatkowe"
+    ],
+    "location": "Łódź",
+    "lawFirm": "Komornik i Wspólnicy",
+    "description": "Doświadczony radca prawny z wieloletnią praktyką w zakresie prawo korporacyjne, prawo podatkowe.",
+    "avatar": "https://randomuser.me/api/portraits/men/5.jpg"
+  },
+  {
+    "firstName": "Tomasz",
+    "lastName": "Lewandowski",
+    "email": "tomasz.lewandowski6@example.com",
+    "password": "Haslo123!",
+    "role": "Notariusz",
+    "isLawyer": true,
+    "specialization": [
+      "prawo podatkowe",
+      "prawo administracyjne",
+      "prawo spadkowe"
+    ],
+    "location": "Szczecin",
+    "lawFirm": "Lexis Polonia",
+    "description": "Doświadczony notariusz z wieloletnią praktyką w zakresie prawo podatkowe, prawo administracyjne, prawo spadkowe.",
+    "avatar": "https://randomuser.me/api/portraits/women/6.jpg"
+  },
+  {
+    "firstName": "Agnieszka",
+    "lastName": "Zieliński",
+    "email": "agnieszka.zieliński7@example.com",
+    "password": "Haslo123!",
+    "role": "Komornik",
+    "isLawyer": true,
+    "specialization": [
+      "prawo administracyjne",
+      "prawo spadkowe"
+    ],
+    "location": "Lublin",
+    "lawFirm": "Kancelaria Omega",
+    "description": "Doświadczony komornik z wieloletnią praktyką w zakresie prawo administracyjne, prawo spadkowe.",
+    "avatar": "https://randomuser.me/api/portraits/men/7.jpg"
+  },
+  {
+    "firstName": "Marcin",
+    "lastName": "Szymański",
+    "email": "marcin.szymański8@example.com",
+    "password": "Haslo123!",
+    "role": "Adwokat",
+    "isLawyer": true,
+    "specialization": [
+      "prawo spadkowe",
+      "prawo budowlane"
+    ],
+    "location": "Katowice",
+    "lawFirm": "Kancelaria Alfa",
+    "description": "Doświadczony adwokat z wieloletnią praktyką w zakresie prawo spadkowe, prawo budowlane.",
+    "avatar": "https://randomuser.me/api/portraits/women/8.jpg"
+  },
+  {
+    "firstName": "Joanna",
+    "lastName": "Woźniak",
+    "email": "joanna.woźniak9@example.com",
+    "password": "Haslo123!",
+    "role": "Radca Prawny",
+    "isLawyer": true,
+    "specialization": [
+      "prawo budowlane",
+      "prawo ochrony danych",
+      "sprawa karna"
+    ],
+    "location": "Bydgoszcz",
+    "lawFirm": "Lex Nova",
+    "description": "Doświadczony radca prawny z wieloletnią praktyką w zakresie prawo budowlane, prawo ochrony danych, sprawa karna.",
+    "avatar": "https://randomuser.me/api/portraits/men/9.jpg"
+  },
+  {
+    "firstName": "Krzysztof",
+    "lastName": "Duda",
+    "email": "krzysztof.duda10@example.com",
+    "password": "Haslo123!",
+    "role": "Notariusz",
+    "isLawyer": true,
+    "specialization": [
+      "prawo ochrony danych",
+      "sprawa karna"
+    ],
+    "location": "Warszawa",
+    "lawFirm": "Kancelaria PrawoPlus",
+    "description": "Doświadczony notariusz z wieloletnią praktyką w zakresie prawo ochrony danych, sprawa karna.",
+    "avatar": "https://randomuser.me/api/portraits/women/10.jpg"
+  },
+  {
+    "firstName": "Ewa",
+    "lastName": "Kozłowski",
+    "email": "ewa.kozłowski11@example.com",
+    "password": "Haslo123!",
+    "role": "Komornik",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa karna",
+      "sprawa cywilna"
+    ],
+    "location": "Kraków",
+    "lawFirm": "Lex & Partnerzy",
+    "description": "Doświadczony komornik z wieloletnią praktyką w zakresie sprawa karna, sprawa cywilna.",
+    "avatar": "https://randomuser.me/api/portraits/men/11.jpg"
+  },
+  {
+    "firstName": "Marek",
+    "lastName": "Jankowski",
+    "email": "marek.jankowski12@example.com",
+    "password": "Haslo123!",
+    "role": "Adwokat",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa cywilna",
+      "sprawa rodzinna",
+      "sprawa pracy"
+    ],
+    "location": "Wrocław",
+    "lawFirm": "Prawo 24",
+    "description": "Doświadczony adwokat z wieloletnią praktyką w zakresie sprawa cywilna, sprawa rodzinna, sprawa pracy.",
+    "avatar": "https://randomuser.me/api/portraits/women/12.jpg"
+  },
+  {
+    "firstName": "Małgorzata",
+    "lastName": "Mazur",
+    "email": "małgorzata.mazur13@example.com",
+    "password": "Haslo123!",
+    "role": "Radca Prawny",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa rodzinna",
+      "sprawa pracy"
+    ],
+    "location": "Gdańsk",
+    "lawFirm": "Adwokaci i Radcy",
+    "description": "Doświadczony radca prawny z wieloletnią praktyką w zakresie sprawa rodzinna, sprawa pracy.",
+    "avatar": "https://randomuser.me/api/portraits/men/13.jpg"
+  },
+  {
+    "firstName": "Adam",
+    "lastName": "Krawczyk",
+    "email": "adam.krawczyk14@example.com",
+    "password": "Haslo123!",
+    "role": "Notariusz",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa pracy",
+      "sprawa nieruchomości"
+    ],
+    "location": "Poznań",
+    "lawFirm": "Notus Kancelaria",
+    "description": "Doświadczony notariusz z wieloletnią praktyką w zakresie sprawa pracy, sprawa nieruchomości.",
+    "avatar": "https://randomuser.me/api/portraits/women/14.jpg"
+  },
+  {
+    "firstName": "Beata",
+    "lastName": "Kaczmarek",
+    "email": "beata.kaczmarek15@example.com",
+    "password": "Haslo123!",
+    "role": "Komornik",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa nieruchomości",
+      "prawo korporacyjne",
+      "prawo podatkowe"
+    ],
+    "location": "Łódź",
+    "lawFirm": "Komornik i Wspólnicy",
+    "description": "Doświadczony komornik z wieloletnią praktyką w zakresie sprawa nieruchomości, prawo korporacyjne, prawo podatkowe.",
+    "avatar": "https://randomuser.me/api/portraits/men/15.jpg"
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Piotrowski",
+    "email": "robert.piotrowski16@example.com",
+    "password": "Haslo123!",
+    "role": "Adwokat",
+    "isLawyer": true,
+    "specialization": [
+      "prawo korporacyjne",
+      "prawo podatkowe"
+    ],
+    "location": "Szczecin",
+    "lawFirm": "Lexis Polonia",
+    "description": "Doświadczony adwokat z wieloletnią praktyką w zakresie prawo korporacyjne, prawo podatkowe.",
+    "avatar": "https://randomuser.me/api/portraits/women/16.jpg"
+  },
+  {
+    "firstName": "Natalia",
+    "lastName": "Grabowski",
+    "email": "natalia.grabowski17@example.com",
+    "password": "Haslo123!",
+    "role": "Radca Prawny",
+    "isLawyer": true,
+    "specialization": [
+      "prawo podatkowe",
+      "prawo administracyjne"
+    ],
+    "location": "Lublin",
+    "lawFirm": "Kancelaria Omega",
+    "description": "Doświadczony radca prawny z wieloletnią praktyką w zakresie prawo podatkowe, prawo administracyjne.",
+    "avatar": "https://randomuser.me/api/portraits/men/17.jpg"
+  },
+  {
+    "firstName": "Jakub",
+    "lastName": "Pawłowski",
+    "email": "jakub.pawłowski18@example.com",
+    "password": "Haslo123!",
+    "role": "Notariusz",
+    "isLawyer": true,
+    "specialization": [
+      "prawo administracyjne",
+      "prawo spadkowe",
+      "prawo budowlane"
+    ],
+    "location": "Katowice",
+    "lawFirm": "Kancelaria Alfa",
+    "description": "Doświadczony notariusz z wieloletnią praktyką w zakresie prawo administracyjne, prawo spadkowe, prawo budowlane.",
+    "avatar": "https://randomuser.me/api/portraits/women/18.jpg"
+  },
+  {
+    "firstName": "Monika",
+    "lastName": "Michalak",
+    "email": "monika.michalak19@example.com",
+    "password": "Haslo123!",
+    "role": "Komornik",
+    "isLawyer": true,
+    "specialization": [
+      "prawo spadkowe",
+      "prawo budowlane"
+    ],
+    "location": "Bydgoszcz",
+    "lawFirm": "Lex Nova",
+    "description": "Doświadczony komornik z wieloletnią praktyką w zakresie prawo spadkowe, prawo budowlane.",
+    "avatar": "https://randomuser.me/api/portraits/men/19.jpg"
+  },
+  {
+    "firstName": "Rafał",
+    "lastName": "Nowicki",
+    "email": "rafał.nowicki20@example.com",
+    "password": "Haslo123!",
+    "role": "Adwokat",
+    "isLawyer": true,
+    "specialization": [
+      "prawo budowlane",
+      "prawo ochrony danych"
+    ],
+    "location": "Warszawa",
+    "lawFirm": "Kancelaria PrawoPlus",
+    "description": "Doświadczony adwokat z wieloletnią praktyką w zakresie prawo budowlane, prawo ochrony danych.",
+    "avatar": "https://randomuser.me/api/portraits/women/20.jpg"
+  },
+  {
+    "firstName": "Alicja",
+    "lastName": "Adamczyk",
+    "email": "alicja.adamczyk21@example.com",
+    "password": "Haslo123!",
+    "role": "Radca Prawny",
+    "isLawyer": true,
+    "specialization": [
+      "prawo ochrony danych",
+      "sprawa karna",
+      "sprawa cywilna"
+    ],
+    "location": "Kraków",
+    "lawFirm": "Lex & Partnerzy",
+    "description": "Doświadczony radca prawny z wieloletnią praktyką w zakresie prawo ochrony danych, sprawa karna, sprawa cywilna.",
+    "avatar": "https://randomuser.me/api/portraits/men/21.jpg"
+  },
+  {
+    "firstName": "Szymon",
+    "lastName": "Zając",
+    "email": "szymon.zając22@example.com",
+    "password": "Haslo123!",
+    "role": "Notariusz",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa karna",
+      "sprawa cywilna"
+    ],
+    "location": "Wrocław",
+    "lawFirm": "Prawo 24",
+    "description": "Doświadczony notariusz z wieloletnią praktyką w zakresie sprawa karna, sprawa cywilna.",
+    "avatar": "https://randomuser.me/api/portraits/women/22.jpg"
+  },
+  {
+    "firstName": "Karolina",
+    "lastName": "Pietrzak",
+    "email": "karolina.pietrzak23@example.com",
+    "password": "Haslo123!",
+    "role": "Komornik",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa cywilna",
+      "sprawa rodzinna"
+    ],
+    "location": "Gdańsk",
+    "lawFirm": "Adwokaci i Radcy",
+    "description": "Doświadczony komornik z wieloletnią praktyką w zakresie sprawa cywilna, sprawa rodzinna.",
+    "avatar": "https://randomuser.me/api/portraits/men/23.jpg"
+  },
+  {
+    "firstName": "Łukasz",
+    "lastName": "Nowacki",
+    "email": "łukasz.nowacki24@example.com",
+    "password": "Haslo123!",
+    "role": "Adwokat",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa rodzinna",
+      "sprawa pracy",
+      "sprawa nieruchomości"
+    ],
+    "location": "Poznań",
+    "lawFirm": "Notus Kancelaria",
+    "description": "Doświadczony adwokat z wieloletnią praktyką w zakresie sprawa rodzinna, sprawa pracy, sprawa nieruchomości.",
+    "avatar": "https://randomuser.me/api/portraits/women/24.jpg"
+  },
+  {
+    "firstName": "Dorota",
+    "lastName": "Wojciechowski",
+    "email": "dorota.wojciechowski25@example.com",
+    "password": "Haslo123!",
+    "role": "Radca Prawny",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa pracy",
+      "sprawa nieruchomości"
+    ],
+    "location": "Łódź",
+    "lawFirm": "Komornik i Wspólnicy",
+    "description": "Doświadczony radca prawny z wieloletnią praktyką w zakresie sprawa pracy, sprawa nieruchomości.",
+    "avatar": "https://randomuser.me/api/portraits/men/25.jpg"
+  },
+  {
+    "firstName": "Maciej",
+    "lastName": "Malinowski",
+    "email": "maciej.malinowski26@example.com",
+    "password": "Haslo123!",
+    "role": "Notariusz",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa nieruchomości",
+      "prawo korporacyjne"
+    ],
+    "location": "Szczecin",
+    "lawFirm": "Lexis Polonia",
+    "description": "Doświadczony notariusz z wieloletnią praktyką w zakresie sprawa nieruchomości, prawo korporacyjne.",
+    "avatar": "https://randomuser.me/api/portraits/women/26.jpg"
+  },
+  {
+    "firstName": "Sandra",
+    "lastName": "Jaworski",
+    "email": "sandra.jaworski27@example.com",
+    "password": "Haslo123!",
+    "role": "Komornik",
+    "isLawyer": true,
+    "specialization": [
+      "prawo korporacyjne",
+      "prawo podatkowe",
+      "prawo administracyjne"
+    ],
+    "location": "Lublin",
+    "lawFirm": "Kancelaria Omega",
+    "description": "Doświadczony komornik z wieloletnią praktyką w zakresie prawo korporacyjne, prawo podatkowe, prawo administracyjne.",
+    "avatar": "https://randomuser.me/api/portraits/men/27.jpg"
+  },
+  {
+    "firstName": "Wojciech",
+    "lastName": "Górski",
+    "email": "wojciech.górski28@example.com",
+    "password": "Haslo123!",
+    "role": "Adwokat",
+    "isLawyer": true,
+    "specialization": [
+      "prawo podatkowe",
+      "prawo administracyjne"
+    ],
+    "location": "Katowice",
+    "lawFirm": "Kancelaria Alfa",
+    "description": "Doświadczony adwokat z wieloletnią praktyką w zakresie prawo podatkowe, prawo administracyjne.",
+    "avatar": "https://randomuser.me/api/portraits/women/28.jpg"
+  },
+  {
+    "firstName": "Natalia",
+    "lastName": "Ostrowski",
+    "email": "natalia.ostrowski29@example.com",
+    "password": "Haslo123!",
+    "role": "Radca Prawny",
+    "isLawyer": true,
+    "specialization": [
+      "prawo administracyjne",
+      "prawo spadkowe"
+    ],
+    "location": "Bydgoszcz",
+    "lawFirm": "Lex Nova",
+    "description": "Doświadczony radca prawny z wieloletnią praktyką w zakresie prawo administracyjne, prawo spadkowe.",
+    "avatar": "https://randomuser.me/api/portraits/men/29.jpg"
+  },
+  {
+    "firstName": "Grzegorz",
+    "lastName": "Król",
+    "email": "grzegorz.król30@example.com",
+    "password": "Haslo123!",
+    "role": "Notariusz",
+    "isLawyer": true,
+    "specialization": [
+      "prawo spadkowe",
+      "prawo budowlane",
+      "prawo ochrony danych"
+    ],
+    "location": "Warszawa",
+    "lawFirm": "Kancelaria PrawoPlus",
+    "description": "Doświadczony notariusz z wieloletnią praktyką w zakresie prawo spadkowe, prawo budowlane, prawo ochrony danych.",
+    "avatar": "https://randomuser.me/api/portraits/women/30.jpg"
+  },
+  {
+    "firstName": "Patrycja",
+    "lastName": "Bąk",
+    "email": "patrycja.bąk31@example.com",
+    "password": "Haslo123!",
+    "role": "Komornik",
+    "isLawyer": true,
+    "specialization": [
+      "prawo budowlane",
+      "prawo ochrony danych"
+    ],
+    "location": "Kraków",
+    "lawFirm": "Lex & Partnerzy",
+    "description": "Doświadczony komornik z wieloletnią praktyką w zakresie prawo budowlane, prawo ochrony danych.",
+    "avatar": "https://randomuser.me/api/portraits/men/31.jpg"
+  },
+  {
+    "firstName": "Marcel",
+    "lastName": "Rutkowski",
+    "email": "marcel.rutkowski32@example.com",
+    "password": "Haslo123!",
+    "role": "Adwokat",
+    "isLawyer": true,
+    "specialization": [
+      "prawo ochrony danych",
+      "sprawa karna"
+    ],
+    "location": "Wrocław",
+    "lawFirm": "Prawo 24",
+    "description": "Doświadczony adwokat z wieloletnią praktyką w zakresie prawo ochrony danych, sprawa karna.",
+    "avatar": "https://randomuser.me/api/portraits/women/32.jpg"
+  },
+  {
+    "firstName": "Kamila",
+    "lastName": "Sawicki",
+    "email": "kamila.sawicki33@example.com",
+    "password": "Haslo123!",
+    "role": "Radca Prawny",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa karna",
+      "sprawa cywilna",
+      "sprawa rodzinna"
+    ],
+    "location": "Gdańsk",
+    "lawFirm": "Adwokaci i Radcy",
+    "description": "Doświadczony radca prawny z wieloletnią praktyką w zakresie sprawa karna, sprawa cywilna, sprawa rodzinna.",
+    "avatar": "https://randomuser.me/api/portraits/men/33.jpg"
+  },
+  {
+    "firstName": "Piotr",
+    "lastName": "Kubiak",
+    "email": "piotr.kubiak34@example.com",
+    "password": "Haslo123!",
+    "role": "Notariusz",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa cywilna",
+      "sprawa rodzinna"
+    ],
+    "location": "Poznań",
+    "lawFirm": "Notus Kancelaria",
+    "description": "Doświadczony notariusz z wieloletnią praktyką w zakresie sprawa cywilna, sprawa rodzinna.",
+    "avatar": "https://randomuser.me/api/portraits/women/34.jpg"
+  },
+  {
+    "firstName": "Martyna",
+    "lastName": "Wolski",
+    "email": "martyna.wolski35@example.com",
+    "password": "Haslo123!",
+    "role": "Komornik",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa rodzinna",
+      "sprawa pracy"
+    ],
+    "location": "Łódź",
+    "lawFirm": "Komornik i Wspólnicy",
+    "description": "Doświadczony komornik z wieloletnią praktyką w zakresie sprawa rodzinna, sprawa pracy.",
+    "avatar": "https://randomuser.me/api/portraits/men/35.jpg"
+  },
+  {
+    "firstName": "Dariusz",
+    "lastName": "Sikora",
+    "email": "dariusz.sikora36@example.com",
+    "password": "Haslo123!",
+    "role": "Adwokat",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa pracy",
+      "sprawa nieruchomości",
+      "prawo korporacyjne"
+    ],
+    "location": "Szczecin",
+    "lawFirm": "Lexis Polonia",
+    "description": "Doświadczony adwokat z wieloletnią praktyką w zakresie sprawa pracy, sprawa nieruchomości, prawo korporacyjne.",
+    "avatar": "https://randomuser.me/api/portraits/women/36.jpg"
+  },
+  {
+    "firstName": "Emilia",
+    "lastName": "Baran",
+    "email": "emilia.baran37@example.com",
+    "password": "Haslo123!",
+    "role": "Radca Prawny",
+    "isLawyer": true,
+    "specialization": [
+      "sprawa nieruchomości",
+      "prawo korporacyjne"
+    ],
+    "location": "Lublin",
+    "lawFirm": "Kancelaria Omega",
+    "description": "Doświadczony radca prawny z wieloletnią praktyką w zakresie sprawa nieruchomości, prawo korporacyjne.",
+    "avatar": "https://randomuser.me/api/portraits/men/37.jpg"
+  },
+  {
+    "firstName": "Łucja",
+    "lastName": "Mucha",
+    "email": "łucja.mucha38@example.com",
+    "password": "Haslo123!",
+    "role": "Notariusz",
+    "isLawyer": true,
+    "specialization": [
+      "prawo korporacyjne",
+      "prawo podatkowe"
+    ],
+    "location": "Katowice",
+    "lawFirm": "Kancelaria Alfa",
+    "description": "Doświadczony notariusz z wieloletnią praktyką w zakresie prawo korporacyjne, prawo podatkowe.",
+    "avatar": "https://randomuser.me/api/portraits/women/38.jpg"
+  },
+  {
+    "firstName": "Jakub",
+    "lastName": "Wróbel",
+    "email": "jakub.wróbel39@example.com",
+    "password": "Haslo123!",
+    "role": "Komornik",
+    "isLawyer": true,
+    "specialization": [
+      "prawo podatkowe",
+      "prawo administracyjne",
+      "prawo spadkowe"
+    ],
+    "location": "Bydgoszcz",
+    "lawFirm": "Lex Nova",
+    "description": "Doświadczony komornik z wieloletnią praktyką w zakresie prawo podatkowe, prawo administracyjne, prawo spadkowe.",
+    "avatar": "https://randomuser.me/api/portraits/men/39.jpg"
+  }
+]

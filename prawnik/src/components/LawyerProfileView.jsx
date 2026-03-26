@@ -57,13 +57,13 @@ export default function LawyerProfileView({ user, onClose }) {
   const isBooked = (date, slot) => appointments.some(a => a.date === date && a.slot === slot);
 
   return (
-    <div className="lawyer-profile-view" style={{ padding: 20, background: "white", borderRadius: 12, maxWidth: 800, margin: "20px auto", boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}>
+    <div className="lawyer-profile-view" style={{ padding: 20, background: "white", borderRadius: 12, width: "100%", boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}>
       <button onClick={onClose} style={{ float: "right", background: "none", border: "none", fontSize: 24, cursor: "pointer" }}>×</button>
       <div style={{ textAlign: "center", marginBottom: 20 }}>
         <img
           src={user?.avatar || "https://via.placeholder.com/200x120"}
           alt="avatar"
-          style={{ width: 200, height: 120, objectFit: "cover", borderRadius: 8 }}
+          style={{ width: "100%", maxWidth: 260, height: 160, objectFit: "cover", borderRadius: 8 }}
         />
         <h2 style={{ marginTop: 10 }}>{user?.firstName} {user?.lastName}</h2>
       </div>
@@ -90,7 +90,7 @@ export default function LawyerProfileView({ user, onClose }) {
       )}
 
       <h3>Kalendarz</h3>
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 15, marginBottom: 10 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr auto', alignItems: 'center', gap: 10, marginBottom: 10 }}>
         <button
           onClick={() => setGroupOffset(g => Math.max(0, g - 1))}
           disabled={groupOffset === 0}
@@ -107,61 +107,20 @@ export default function LawyerProfileView({ user, onClose }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: 0,
-            flexShrink: 0,
-            marginTop: 32
+            padding: 0
           }}
         >◀</button>
-        
-        <div style={{ flex: 1 }}>
-          <span style={{ fontWeight: 'bold', textAlign: 'center', display: 'block', marginBottom: 10 }}>
-            {(() => {
-              const dates = generateSixDays(groupOffset);
-              if (dates.length === 0) return '';
-              const firstDate = dates[0];
-              const lastDate = dates[dates.length - 1];
-              return `${firstDate.toLocaleDateString('pl-PL')} - ${lastDate.toLocaleDateString('pl-PL')}`;
-            })()}
-          </span>
-          <div className="calendar-wrapper" style={{ width: "100%", overflowX: "auto" }}>
-            <table style={{ borderCollapse: "collapse", minWidth: "600px" }}>
-            <thead>
-              <tr>
-                <th></th>
-                {generateSixDays(groupOffset).map(d => (
-                  <th key={d.toISOString()} style={{ padding: 8, border: "1px solid #ddd" }}>
-                    <div style={{ fontWeight: 'bold' }}>{d.toLocaleDateString('pl-PL', { weekday: 'short' })}</div>
-                    <div>{d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'numeric' })}</div>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {slots.map(slot => (
-                <tr key={slot}>
-                  <td style={{ padding: 8, border: "1px solid #ddd" }}>{slot}</td>
-                  {generateSixDays(groupOffset).map(d => {
-                    const dateStr = d.toISOString().split('T')[0];
-                    return (
-                      <td key={dateStr + slot} style={{ padding: 8, border: "1px solid #ddd", textAlign: "center" }}>
-                        <button
-                          disabled={isBooked(dateStr, slot)}
-                          onClick={() => handleBook(dateStr, slot)}
-                          className="btn-gold"
-                          style={{ padding: "6px 12px", fontSize: 12 }}
-                        >
-                          {isBooked(dateStr, slot) ? "Zarezerwowane" : "Rezerwuj"}
-                        </button>
-                      </td>
-                    );
-                  })}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          </div>
-        </div>
-        
+
+        <span style={{ fontWeight: 'bold', textAlign: 'center', display: 'block' }}>
+          {(() => {
+            const dates = generateSixDays(groupOffset);
+            if (dates.length === 0) return '';
+            const firstDate = dates[0];
+            const lastDate = dates[dates.length - 1];
+            return `${firstDate.toLocaleDateString('pl-PL')} - ${lastDate.toLocaleDateString('pl-PL')}`;
+          })()}
+        </span>
+
         <button
           onClick={() => setGroupOffset(g => Math.min(60, g + 1))}
           disabled={groupOffset >= 60}
@@ -178,11 +137,49 @@ export default function LawyerProfileView({ user, onClose }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: 0,
-            flexShrink: 0,
-            marginTop: 32
+            padding: 0
           }}
         >▶</button>
+      </div>
+
+      <div style={{ width: '100%', overflowX: 'auto', paddingBottom: 10 }}>
+        <div style={{ minWidth: '560px', maxWidth: '100%', margin: '0 auto' }}>
+          <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+            <thead>
+              <tr>
+                <th style={{ border: '1px solid #ddd', padding: 8 }}></th>
+                {generateSixDays(groupOffset).map(d => (
+                  <th key={d.toISOString()} style={{ padding: 8, border: '1px solid #ddd', background: '#f5f5f5' }}>
+                    <div style={{ fontWeight: 'bold' }}>{d.toLocaleDateString('pl-PL', { weekday: 'short' })}</div>
+                    <div>{d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'numeric' })}</div>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {slots.map(slot => (
+                <tr key={slot}>
+                  <td style={{ padding: 8, border: '1px solid #ddd', background: '#fafafa' }}>{slot}</td>
+                  {generateSixDays(groupOffset).map(d => {
+                    const dateStr = d.toISOString().split('T')[0];
+                    return (
+                      <td key={dateStr + slot} style={{ padding: 8, border: '1px solid #ddd', textAlign: 'center' }}>
+                        <button
+                          disabled={isBooked(dateStr, slot)}
+                          onClick={() => handleBook(dateStr, slot)}
+                          className="btn-gold"
+                          style={{ padding: '6px 12px', fontSize: 12 }}
+                        >
+                          {isBooked(dateStr, slot) ? 'Zarezerwowane' : 'Rezerwuj'}
+                        </button>
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* booking request form modal */}

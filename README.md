@@ -1,58 +1,70 @@
-# Projekt_na_semestr
-<p>
-3.LexConnect(Legal Marketplace & Case Management)
+# Getting Started with Create React App
 
-1. Architektura Systemu (Kluczowe moduły)
-A. Moduł Klienta (Frontend Publiczny)
-  I. Wyszukiwarka z filtrami: Szukanie po specjalizacji (np. prawo spadkowe, karne), lokalizacji (mapa) oraz formie pomocy (online/stacjonarnie).
-    - Kreator Zlecenia (Intake Form): Zamiast pisać maila, klient wypełnia ustrukturyzowany formularz:
-      -Typ sprawy (np. pozew o zapłatę).
-      -Opis stanu faktycznego.
-      -Bezpieczny upload plików (skany pism, umowy).
-      -Budżet (widełki cenowe lub zapytanie o wycenę).
-  II. Profil Prawnika: Opinie, biogram, cennik za standardowe porady oraz licznik "sukcesów" (jeśli prawo korporacyjne na to pozwala w danej jurysdykcji).
-    B. Moduł Prawnika (Panel Zarządzania)
-    -Tablica Ofert (Lead Management): Widok spraw "oczekujących". Prawnik widzi skrócony opis i może zdecydować: "Akceptuję", "Odrzucam" lub "Dopytuję o szczegóły".
-    -Dashboard Aktywnych Spraw: Prosty widok w stylu Kanban (Do zrobienia | W toku | Zakończone).
-    -Moduł Komunikacji: Wewnętrzny czat (zamiast maili), który automatycznie archiwizuje ustalenia z klientem.
-    -Kalendarz Terminów: Powiadomienia o zbliżających się rozprawach lub terminach zawitych dla przyjętych spraw.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-2. Funkcjonalności MVP (Na start)
-Aby projekt ruszył i był użyteczny, nie potrzebujesz od razu wszystkiego. Skup się na:
-  1.Systemie weryfikacji prawników: Użytkownik musi mieć pewność, że adwokat to nie oszust. Integracja z listami samorządowymi (np. wyszukiwarka NRA/KIRP).
-  2.Szyfrowanym "Sejfie Dokumentów": To "być albo nie być" aplikacji. Dokumenty muszą być szyfrowane (AES-256), a dostęp do nich musi być logowany.
-  3.Generatorze Umów o Zastępstwo: Automatyczne generowanie prostego pełnomocnictwa lub umowy o świadczenie usług prawnych po zaakceptowaniu zlecenia wewnątrz aplikacji.
-  4.Systemie Płatności (Escrow): Klient wpłaca środki na konto techniczne, a system uwalnia je dla prawnika po zakończeniu etapu (np. po wysłaniu gotowego pozwu). To buduje ogromne zaufanie.
+## Available Scripts
 
-4. Scenariusz użycia (User Flow)
-  -Jan Kowalski dostaje nakaz zapłaty z sądu. Wchodzi na LexConnect.
-  -Wypełnia formularz, wrzuca zdjęcie nakazu telefonem. Wybiera opcję "Szukam radcy prawnego z Warszawy do 500 zł".
-  -Mecenas Nowak dostaje powiadomienie push. Przegląda dokumenty w panelu, widzi, że sprawa jest prosta.
-  -Mecenas klika "Podejmij sprawę". System wysyła Janowi wiadomość: "Mecenas Nowak przyjął Twoje zlecenie. Opłać usługę, aby zacząć".
-  -Jan płaci przez aplikację. Pieniądze są "zamrożone".
-  -Mecenas przesyła gotowy sprzeciw od nakazu zapłaty przez panel.
-  -Jan klika "Odebrano". Pieniądze trafiają na konto Mecenasa.</p>
-<h1>Plan Działania</h1>
-<ol>
-  <li>Nastawienie mnetalne <- tu jesteśmy</li>
-  <li>Zebranie informacji</li>
-  <li>Odpoczynek po zbieraniu informacji</li>
-  <li>Rozdzielenie zadań</li>
-  <li>ustalenia wizualne</li>
-  <li>Odpoczynek</li>
-  <li>Szkielet strony</li>
-  <li>Odpoczynek</li>
-  <li>Prace Wykończeniowe</li>
-  <li>Odpoczynek</li>
-  <li>Wakacje</li>
-</ol>
+In the project directory, you can run:
 
+### `npm start`
 
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-  
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
+### `npm test`
 
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `npm run build`
 
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
